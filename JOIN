@@ -1,0 +1,11 @@
+select
+  o.order_id,
+  o.user_id,
+  num_of_item,
+  i.order_id,
+  i.user_id,
+  round(sum(sale_price), 2) as receita
+from `bigquery-public-data.thelook_ecommerce.orders` as o
+join `bigquery-public-data.thelook_ecommerce.order_items` as i on o.order_id = i.order_id
+group by 1,2,3,4,5
+order by receita desc;
